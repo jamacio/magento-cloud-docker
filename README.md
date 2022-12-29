@@ -56,7 +56,7 @@ Go to the directory and copy the configuration example
 cd magento-cloud-docker
 ```
 ---
-After running the build command, notice that a folder has been created: magento
+After running the build command, notice that a folder has been created: magento2
 ```
 make build
 ```

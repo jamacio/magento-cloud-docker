@@ -11,6 +11,7 @@ down:
 	docker-compose -f docker-compose.yml down -v	
 	
 build:
+	mkdir -m 777 magento2
 	docker-compose -f docker-compose.yml down && docker-compose -f docker-compose.yml up -d --build --remove-orphans
 
 # Magento commands
@@ -31,7 +32,6 @@ magento-clear:
 	docker-compose run deploy sh -c 'rm -rf pub/static/*; rm -rf /var/di/ /var/generation/ var/view_preprocessed/ var/cache/ var/page_cache/ var/di/ var/generation/* /generated/*;php -d memory_limit=-1 bin/magento setup:upgrade; php -d memory_limit=-1 bin/magento cache:flush; php -d memory_limit=-1 bin/magento cache:clean; php -d memory_limit=-1 bin/magento setup:static-content:deploy en_US pt_BR -f; php -d memory_limit=-1 bin/magento setup:di:compile; php -d memory_limit=-1 bin/magento cache:flush; php -d memory_limit=-1 bin/magento cache:clean; php -d memory_limit=-1 bin/magento index:reindex; php -d memory_limit=-1 bin/magento cron:run; chmod -R 777 var; chmod -R 777 generated; chmod -R 777 pub/static'	
 
 magento-download:
-	mkdir -m 777 magento2
 	docker-compose run deploy sh -c 'composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition .'
 
 magento-install:
