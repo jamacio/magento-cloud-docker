@@ -20,6 +20,10 @@ magento-bash:
 magento-restore-db:
 	docker-compose run deploy sh -c 'exec mysql -u"root" -p"root" magento2' < $(filter-out $@,$(MAKECMDGOALS))
 
+magento-restore-db:
+	docker-compose run deploy sh -c 'php bin/magento sampledata:deploy;'
+	magento-clear
+
 magento-composer:
 	docker-compose run deploy sh -c 'COMPOSER_MEMORY_LIMIT=-1 composer $(filter-out $@,$(MAKECMDGOALS))'
 
@@ -33,3 +37,8 @@ magento-download:
 magento-install:
 	docker-compose run deploy sh -c 'php bin/magento setup:install --base-url=http://127.0.0.1/ --db-host=db.magento2.docker --db-name=magento2 --db-user=magento2 --db-password=magento2 --admin-firstname=Magento --admin-lastname=User --admin-email=user@example.com --admin-user=admin --admin-password=admin123 --language=en_US --currency=USD --timezone=America/Chicago --use-rewrites=1 --search-engine=elasticsearch7 --elasticsearch-host=elasticsearch.magento2.docker --elasticsearch-port=9200; chmod -R 777 app/*'
 	cp .docker/config.php.dist magento2/app/etc/env.php
+
+# Docker commands
+remove-all-images-docker:
+	docker network prune
+	docker rm -vf $(docker ps -a -q); docker rmi -f $(docker images -a -q)
