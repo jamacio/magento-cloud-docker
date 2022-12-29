@@ -23,7 +23,6 @@ magento-restore-db:
 
 magento-sampledata:
 	docker-compose run deploy sh -c 'php bin/magento sampledata:deploy;'
-	make magento-clear
 
 magento-composer:
 	docker-compose run deploy sh -c 'COMPOSER_MEMORY_LIMIT=-1 composer $(filter-out $@,$(MAKECMDGOALS))'

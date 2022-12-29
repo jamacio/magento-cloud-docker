@@ -72,9 +72,14 @@ Install Application
 make magento-install
 ```
 ---
-Download sample data Composer packages
+Download sample data
 ```
 make magento-sampledata
+```
+---
+Magento clear
+```
+make magento-clear
 ```
 
 ## Usage
