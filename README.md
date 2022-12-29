@@ -51,7 +51,7 @@ Clone this repo
 git clone https://github.com/jamacio/magento-cloud-docker.git
 ```
 ---
-Go to the directory and copy the configuration example
+Go to the directory magento-cloud-docker
 ```
 cd magento-cloud-docker
 ```
