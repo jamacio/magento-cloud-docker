@@ -114,3 +114,17 @@ make magento-clear
 4. ``
 make magento-bash
 ``
+
+
+
+## Access the admin panel
+Panel url: ``
+http://localhost/admin
+``
+login: ``
+admin
+``
+password: ``
+admin123
+``
+
