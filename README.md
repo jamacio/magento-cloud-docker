@@ -119,9 +119,8 @@ make magento-bash
 
 ## Access the admin panel
 
-Panel url:
-```
-http://localhost/admin
+Panel url: [http://localhost/admin](http://localhost/admin)
+
 ```
 login:
 ```
