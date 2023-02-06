@@ -1,3 +1,4 @@
+# Usage commands
 up:
 	docker-compose -f docker-compose.yml down && docker-compose -f docker-compose.yml up -d --remove-orphans
 
@@ -14,11 +15,6 @@ build:
 	cp .docker/config.php.dist app/etc/env.php
 	docker-compose -f docker-compose.yml down && docker-compose -f docker-compose.yml up -d --build --remove-orphans
 
-
-# Docker commands
-remove-all-images-docker:
-	docker network prune
-	docker rm -vf $(docker ps -a -q); docker rmi -f $(docker images -a -q)
 
 
 # Magento commands
@@ -42,5 +38,11 @@ magento-download:
 magento-install:
 	sudo chmod -R 777 magento2/app
 	rm -rf magento2/app/etc/env.php
+	docker exec -i magento-mysql sh -c 'exec mysql -u"root" -p"magento2"  -e "create database  IF NOT EXISTS magento2"'
 	docker-compose run deploy sh -c 'php bin/magento setup:install --base-url=http://localhost/ --db-host=db.magento2.docker --db-name=magento2 --db-user=magento2 --db-password=magento2 --admin-firstname=Magento --admin-lastname=User --admin-email=user@example.com --admin-user=admin --admin-password=admin123 --language=en_US --currency=USD --timezone=America/Chicago --use-rewrites=1 --search-engine=elasticsearch7 --elasticsearch-host=elasticsearch.magento2.docker --elasticsearch-port=9200; chmod -R 777 app/*'
 	cp .docker/config.php.dist magento2/app/etc/env.php
+
+
+# Docker commands
+# docker network prune
+# docker rm -vf $(docker ps -a -q); docker rmi -f $(docker images -a -q)

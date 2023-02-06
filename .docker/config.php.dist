@@ -24,9 +24,6 @@ return [
         ],
         'table_prefix' => ''
     ],
-    'crypt' => [
-        'key' => '3164ed8e7cb58914c1da91c5907eb973'
-    ],
     'resource' => [
         'default_setup' => [
             'connection' => 'default'
@@ -46,7 +43,7 @@ return [
             'compression_threshold' => '2048',
             'compression_library' => 'gzip',
             'log_level' => '4',
-            'max_concurrency' => '6',
+            'max_concurrency' => '50',
             'break_after_frontend' => '5',
             'break_after_adminhtml' => '30',
             'first_lifetime' => '600',
@@ -97,7 +94,7 @@ return [
         'vertex' => 1
     ],
     'downloadable_domains' => [
-        '*.vm'
+        'localhost'
     ],
     'install' => [
         'date' => 'Wed, 03 Feb 2021 14:37:01 +0000'
