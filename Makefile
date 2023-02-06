@@ -34,6 +34,9 @@ magento-clear:
 magento-download:
 	docker-compose run deploy sh -c 'composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition .'
 
+magento-sampledata:
+	docker-compose run deploy sh -c 'php -d memory=-1 bin/magento sampledata:deploy; php -d memory=-1 bin/magento setup:upgrade;'
+
 magento-install:
 	sudo chmod -R 777 magento2/app
 	rm -rf magento2/app/etc/env.php
