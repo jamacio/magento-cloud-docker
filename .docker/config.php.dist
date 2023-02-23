@@ -110,17 +110,21 @@ return [
                     'cors_allowed_methods' => 'GET, POST, OPTIONS',
                     'cors_allowed_headers' => '*',
                     'cors_max_age' => '86400',
-                    'cors_allow_credentials' => 1,
-                    'unsecure' => [
-                        'base_url' => 'localhost/',
-                        'base_media_url' => 'localhost/media'
-                    ],
-                    'secure' => [
-                        'base_url' => 'localhost/',
-                        'base_media_url' => 'localhost/media',
-                        'use_in_frontend' => '0',
-                        'use_in_adminhtml' => '0'
-                    ]
+                    'cors_allow_credentials' => 1
+                ],
+                'cookie' => [
+                    'cookie_domain' => ''
+                ],
+                'unsecure' => [
+                    'base_url' => 'http://localhost/',
+                    'base_media_url' => 'http://localhost/media/'
+                ],
+                'secure' => [
+                    'base_url' => 'https://localhost/',
+                    'base_media_url' => 'https://localhost/media/',
+                    'use_in_frontend' => '0',
+                    'use_in_adminhtml' => '0',
+                    'base_url_frontend' => '0.0.0.0:10000'
                 ]
             ],
             'catalog' => [
@@ -136,3 +140,4 @@ return [
         ]
     ]
 ];
+
