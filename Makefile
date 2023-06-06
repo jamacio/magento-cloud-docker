@@ -21,6 +21,7 @@ magento-bash:
 	 docker-compose run deploy
 
 magento-restore-db:
+	docker exec -i magento-mysql sh -c 'mysql -u"root" -p"magento2"  -e "drop database IF EXISTS magento2"'
 	docker exec -i magento-mysql sh -c 'mysql -u"root" -p"magento2"  -e "create database  IF NOT EXISTS magento2"'
 	docker cp $(filter-out $@,$(MAKECMDGOALS)) magento-mysql:/dump-database.sql
 	docker exec -i magento-mysql sh -c 'mysql -u root -p"magento2" magento2 < dump-database.sql'
