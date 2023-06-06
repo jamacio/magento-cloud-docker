@@ -25,7 +25,6 @@ magento-restore-db:
 	docker cp $(filter-out $@,$(MAKECMDGOALS)) magento-mysql:/dump-database.sql
 	docker exec -i magento-mysql sh -c 'mysql -u root -p"magento2" magento2 < dump-database.sql'
 
-#mysql -u root -p"magento2" teste_restore < cjftwn6tlitoy--production-vohbr3y--mysql--cjftwn6tlitoy--dump.sql 
 magento-composer:
 	docker-compose run deploy sh -c 'COMPOSER_MEMORY_LIMIT=-1 composer $(filter-out $@,$(MAKECMDGOALS))'
 
