@@ -60,7 +60,7 @@ cd magento-cloud-docker
 
 ---
 
-After running the build command, notice that a folder has been created: magento2
+After running the build command, notice that a folder has been created: magento
 
 ```
 make build
