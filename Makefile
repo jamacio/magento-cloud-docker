@@ -29,6 +29,8 @@ magento-composer:
 	docker-compose run deploy sh -c 'php -d memory=-1 /.docker/composer.phar  $(filter-out $@,$(MAKECMDGOALS))'
 
 magento-clear:
+	@echo "\033[0;32mThis command will take a while, it is a good time to grab a coffee.\033[0m"
+	@sleep 5
 	docker-compose run deploy sh -c 'rm -rf pub/static/* rm -rf /var/di/ /var/generation/ var/view_preprocessed/ var/cache/ var/page_cache/ var/di/ var/generation/* /generated/*;php -d memory_limit=-1 bin/magento setup:upgrade; php -d memory_limit=-1 bin/magento cache:flush; php -d memory_limit=-1 bin/magento cache:clean; php -d memory_limit=-1 bin/magento setup:static-content:deploy en_US es_MX -f; php -d memory_limit=-1 bin/magento setup:di:compile; php -d memory_limit=-1 bin/magento cache:flush; php -d memory_limit=-1 bin/magento cache:clean; php -d memory_limit=-1 bin/magento index:reindex; php -d memory_limit=-1 bin/magento cron:run; chmod -R 777 var; chmod -R 777 generated; chmod -R 777 pub/static'	
 
 magento-download:
@@ -53,6 +55,11 @@ magento-test:
 # Docker commands
 #	docker network prune
 #	docker rm -vf $(docker ps -a -q); docker rmi -f $(docker images -a -q)
+
+
+# Clear images and containers
+#   docker system df
+#   docker builder prune -f && docker image prune -a -f && docker volume prune -f
 
 
 # Remove all databases
