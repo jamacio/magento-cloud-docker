@@ -1,5 +1,3 @@
-# ./vendor/bin/ece-docker 'build:compose' --mode=developer --php='8.1' --nginx='1.19' --expose-db-port=3306 --no-varnish
-version: "2.1"
 services:
   db:
     hostname: db.magento2.docker
@@ -67,9 +65,9 @@ services:
       magento:
         aliases:
           - redis.magento2.docker
-  elasticsearch:
-    hostname: elasticsearch.magento2.docker
-    image: "magento/magento-cloud-docker-elasticsearch:7.10-1.3.2"
+  opensearch:
+    hostname: opensearch.magento2.docker
+    image: "magento/magento-cloud-docker-opensearch:2.12-1.4.0"
     ulimits:
       memlock:
         soft: -1
@@ -77,10 +75,12 @@ services:
     environment:
       - cluster.name=docker-cluster
       - bootstrap.memory_lock=true
+      - discovery.type=single-node
+      - DISABLE_SECURITY_PLUGIN=true
     networks:
       magento:
         aliases:
-          - elasticsearch.magento2.docker
+          - opensearch.magento2.docker
   fpm:
     hostname: fpm.magento2.docker
     image: "magento/magento-cloud-docker-php:8.4-fpm-1.4.4"
@@ -155,8 +155,8 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
-      elasticsearch:
-        condition: service_healthy
+      opensearch:
+        condition: service_started
   mailhog:
     hostname: mailhog.magento2.docker
     image: "mailhog/mailhog:latest"

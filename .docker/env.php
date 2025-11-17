@@ -1,5 +1,8 @@
 <?php
 return [
+    'remote_storage' => [
+        'driver' => 'file'
+    ],
     'backend' => [
         'frontName' => 'admin'
     ],
@@ -25,7 +28,7 @@ return [
         'table_prefix' => ''
     ],
     'crypt' => [
-        'key' => '3164ed8e7cb58914c1da91c5907eb973'
+        'key' => 'base64RLvt94/TFdjXeg3MNOXnZO0Zi/HboeBJbZQ+7d8c+y4='
     ],
     'resource' => [
         'default_setup' => [
@@ -33,7 +36,7 @@ return [
         ]
     ],
     'x-frame-options' => 'SAMEORIGIN',
-    'MAGE_MODE' => 'production',
+    'MAGE_MODE' => 'default',
     'session' => [
         'save' => 'redis',
         'redis' => [
@@ -57,7 +60,16 @@ return [
             'max_lifetime' => '2592000'
         ]
     ],
+    'lock' => [
+        'provider' => 'db'
+    ],
+    'directories' => [
+        'document_root_is_pub' => true
+    ],
     'cache' => [
+        'graphql' => [
+            'id_salt' => 'bt30uF491VC1JTIVz9E63IDcISdoNUr3'
+        ],
         'frontend' => [
             'default' => [
                 'backend' => 'Magento\\Framework\\Cache\\Backend\\Redis',
@@ -65,7 +77,8 @@ return [
                     'server' => 'redis.magento2.docker',
                     'database' => '0',
                     'port' => '6379'
-                ]
+                ],
+                'id_prefix' => 'f53_'
             ],
             'page_cache' => [
                 'backend' => 'Magento\\Framework\\Cache\\Backend\\Redis',
@@ -74,14 +87,19 @@ return [
                     'port' => '6379',
                     'database' => '1',
                     'compress_data' => '0'
-                ]
+                ],
+                'id_prefix' => 'f53_'
             ]
-        ]
+        ],
+        'allow_parallel_generation' => false
+    ],
+    'config' => [
+        'async' => 0
     ],
     'cache_types' => [
         'config' => 1,
-        'layout' => 0,
-        'block_html' => 0,
+        'layout' => 1,
+        'block_html' => 1,
         'collections' => 1,
         'reflection' => 1,
         'db_ddl' => 1,
@@ -90,7 +108,8 @@ return [
         'customer_notification' => 1,
         'config_integration' => 1,
         'config_integration_api' => 1,
-        'full_page' => 0,
+        'graphql_query_resolver_result' => 1,
+        'full_page' => 1,
         'target_rule' => 1,
         'config_webservice' => 1,
         'translate' => 1,
@@ -100,7 +119,7 @@ return [
         'localhost',
     ],
     'install' => [
-        'date' => 'Wed, 03 Feb 2021 14:37:01 +0000'
+        'date' => 'Mon, 17 Nov 2025 02:33:10 +0000'
     ],
     'system' => [
         'default' => [
@@ -121,7 +140,6 @@ return [
                     'base_media_url' => 'https://localhost/media/',
                     'use_in_frontend' => '1',
                     'use_in_adminhtml' => '1',
-                    'base_url_frontend' => 'http://localhost:3000'
                 ],
                 'cookie' => [
                     'cookie_domain' => 'localhost'
@@ -129,12 +147,12 @@ return [
             ],
             'catalog' => [
                 'search' => [
-                    'engine' => 'elasticsearch7',
-                    'elasticsearch7_server_hostname' => 'elasticsearch',
-                    'elasticsearch7_server_port' => '9200',
-                    'elasticsearch7_index_prefix' => 'magento2',
-                    'elasticsearch7_enable_auth' => '0',
-                    'elasticsearch7_server_timeout' => '15'
+                    'engine' => 'opensearch',
+                    'opensearch_server_hostname' => 'opensearch.magento2.docker',
+                    'opensearch_server_port' => '9200',
+                    'opensearch_index_prefix' => 'magento2',
+                    'opensearch_enable_auth' => '0',
+                    'opensearch_server_timeout' => '15'
                 ]
             ]
         ]
